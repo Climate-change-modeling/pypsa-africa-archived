@@ -1,3 +1,4 @@
+@@ SETUP
 The project starts from a cloned PyPSA-Africa repository and an Anaconda-managed Python environment. 
 A first data audit is performed on the local data/ directory to identify which inputs are already available, which must be updated, and which are missing for the Algeria–EU modelling question. 
 Available files are then classified into four categories: keep, update, add, or ignore. This step ensures that the final PyPSA model is built only from the datasets relevant to the corridor scenario and avoids unnecessary preprocessing of unused data.
@@ -6,3 +7,13 @@ conda activate pypsa-earth switches your terminal into the exact environment whe
 PyPSA-Earth’s installation docs explicitly say the environment must be activated in each new terminal session so the workflow has access to all required packages.
 % conda install -c conda-forge "pulp>=2.8.0"
 That command installs or updates PuLP in the same environment. PuLP is a Python linear/MILP modelling interface, and PyPSA ecosystems often rely on solver-related Python packages like this when building or checking optimization workflows.
+@@ UNDERSTAND THE PROCESS
+Snakemake starts from the target output and works backward, checking which files are missing and which rule can generate them.
+For PyPSA-Africa/Earth, this means the workflow may first retrieve bundles, then build shapes and OSM network data, then create the base network, then add technologies and costs, then cluster or simplify the system, 
+and finally solve the optimization model into .nc network files.
+bundle_config.yaml  is a support configuration that tells the workflow which downloadable data bundles exist and how bundle retrieval is organized, while your actual modelling choices still mainly live in config.yaml
+First start by understanding config.tutorial.yaml
+@@ RUN
+Input data
+PyPSA-Earth/Africa combines four main input blocks: demand, topology, supply, and climate/renewables.
+The docs show that demand profiles are built from country, weather year, prediction year, and SSP scenario, and stored as CSV time series for each bus in resources/demand_profiles.csv.
