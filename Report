@@ -1,0 +1,8 @@
+The project starts from a cloned PyPSA-Africa repository and an Anaconda-managed Python environment. 
+A first data audit is performed on the local data/ directory to identify which inputs are already available, which must be updated, and which are missing for the Algeria–EU modelling question. 
+Available files are then classified into four categories: keep, update, add, or ignore. This step ensures that the final PyPSA model is built only from the datasets relevant to the corridor scenario and avoids unnecessary preprocessing of unused data.
+% conda activate pypsa-earth
+conda activate pypsa-earth switches your terminal into the exact environment where PyPSA-Earth’s dependencies are installed. 
+PyPSA-Earth’s installation docs explicitly say the environment must be activated in each new terminal session so the workflow has access to all required packages.
+% conda install -c conda-forge "pulp>=2.8.0"
+That command installs or updates PuLP in the same environment. PuLP is a Python linear/MILP modelling interface, and PyPSA ecosystems often rely on solver-related Python packages like this when building or checking optimization workflows.
